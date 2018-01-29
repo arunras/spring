@@ -33,8 +33,6 @@ public class MenuSearchServlet extends HttpServlet {
       out.println("<p>I'm sorry, there are no dishes containing " + searchTerm);
       out.println("</body></html");
     }
-
-
     out.close();
   }
 }

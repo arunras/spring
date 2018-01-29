@@ -24,6 +24,16 @@
     <servlet-class>core.jwd.servlets.MenuSearchServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>core.jwd.servlets.OrderServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>OrderReceivedServlet</servlet-name>
+    <servlet-class>core.jwd.servlets.OrderReceivedServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>HelloWorldServlet</servlet-name>
     <url-pattern>/hello.html</url-pattern>
@@ -39,7 +49,15 @@
     <url-pattern>/searchResults.html</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/order.html</url-pattern>
+  </servlet-mapping>
 
-
+  <servlet-mapping>
+    <servlet-name>OrderReceivedServlet</servlet-name>
+    <url-pattern>/orderReceived.html</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app> 
