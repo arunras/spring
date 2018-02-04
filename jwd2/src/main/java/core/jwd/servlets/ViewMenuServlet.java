@@ -13,7 +13,6 @@ import core.jwd.data.MenuDao;
 import core.jwd.data.MenuDaoFactory;
 import core.jwd.domain.MenuItem;
 
-@WebServlet("")
 public class ViewMenuServlet extends HttpServlet {
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
