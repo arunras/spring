@@ -1,19 +1,19 @@
-<%@ page import = "core.jwd.domain.MenuItem" %>
-<%@ page import = "java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <body>
   <jsp:include page="/header.jsp" />
   <h2>Menu</h2>
+
+  <c:out value="hello world" />
+
   <ul>
-  <%
-    List<MenuItem> menuItems = (List<MenuItem>) request.getAttribute("menuItems");
- 		for (MenuItem menuItem : menuItems) {
-  %>
-  <li><%=menuItem%></li>
-  <%
-		}
-  %>
+
+  <c:forEach items="${menuItems}" var="menuItem">
+    <c:if test="${menuItem.price <= 10 }">
+      <li>${menuItem} - ${menuItem.description}</li>
+    </c:if>
+  </c:forEach>
 
   </ul>
   <jsp:include page="/footer.jsp" />
