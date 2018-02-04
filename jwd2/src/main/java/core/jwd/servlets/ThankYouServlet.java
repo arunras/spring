@@ -10,13 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.RequestDispatcher;
+
 
 @WebServlet("/thankYou.html")
 @ServletSecurity(@HttpConstraint(rolesAllowed= {"user"}))
 public class ThankYouServlet extends HttpServlet {
 
 	
-	public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		
 		HttpSession session = request.getSession();
@@ -26,18 +30,12 @@ public class ThankYouServlet extends HttpServlet {
 			response.sendRedirect("/order.html");
 			return;
 		}
-		
-		
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
 
-		out.println("<html><body><h1>Ricky's Restaurant</h1>");
-		out.println("<h2>Order your food</h2>");
-		
-		out.println("Thank you - your order has been received. You need to pay $" + total);
-				
-		out.println("</body></html>");
-		out.close();
-		
+    request.setAttribute("total", total);
+
+    ServletContext context = getServletContext();
+    RequestDispatcher dispatch = context.getRequestDispatcher("/thankYou.jsp");
+    dispatch.forward(request, response);
+	
 	}
 }
