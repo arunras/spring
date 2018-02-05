@@ -2,7 +2,18 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
-
-	<!-- add your bean definitions here! -->
+  <bean id="motdMessage" class="core.sff.motd.MessageOfTheDayDynamicConfigurableImpl">
+    <property name="messageList">
+      <list>
+        <value>Sunday</value>
+        <value>Monday</value>
+        <value>Tuesday</value>
+        <value>Wednesday</value>
+        <value>Thursday</value>
+        <value>Friday</value>
+        <value>Saturday</value>
+      </list>
+    </property>
+  </bean>
 	
 </beans>
