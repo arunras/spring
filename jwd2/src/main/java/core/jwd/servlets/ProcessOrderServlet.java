@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import core.jwd.data.MenuDao;
 import core.jwd.data.MenuDaoFactory;
 import core.jwd.domain.Order;
+import core.jwd.websockets.KitchenDisplaySessionHandler;
+import core.jwd.websockets.KitchenDisplaySessionHandlerFactory;
 
 @WebServlet("/processorder.html")
 public class ProcessOrderServlet extends HttpServlet{
@@ -47,6 +49,11 @@ public class ProcessOrderServlet extends HttpServlet{
 		String status =  request.getParameter("status");
 		System.out.println(id + " : " + status);
 		menuDao.updateOrderStatus(id,status);
+
+    Order order = menuDao.getOrder(id);
+    KitchenDisplaySessionHandler handler = KitchenDisplaySessionHandlerFactory.getHandler();
+    handler.amendOrder(order);
+
 		doGet(request,response);
-		}
+	}
 }

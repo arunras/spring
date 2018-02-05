@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import core.jwd.data.MenuDao;
 import core.jwd.data.MenuDaoFactory;
 import core.jwd.domain.Order;
+import core.jwd.websockets.KitchenDisplaySessionHandler;
+import core.jwd.websockets.KitchenDisplaySessionHandlerFactory;
 
 @WebServlet("/orderReceived.html")
 public class OrderReceivedServlet extends HttpServlet {
@@ -38,8 +40,11 @@ public class OrderReceivedServlet extends HttpServlet {
 			  
 		}
 		
-		System.out.println("A new order has been received.");
-		
+	  KitchenDisplaySessionHandler handler = KitchenDisplaySessionHandlerFactory.getHandler();	
+    handler.newOrder(order);
+
+
+
 		HttpSession session = request.getSession();
 		session.setAttribute("orderId", order.getId());
 		
