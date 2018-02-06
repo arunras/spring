@@ -2,5 +2,6 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
-  <bean id="bookService" class="core.sff.avalon.services.BookServiceMockImpl" />
+  <bean id="customerService" class="core.sff.crm.services.customers.CustomerManagementMockImpl" />
+  <bean id="diaryService" class="core.sff.crm.services.diary.DiaryManagementServiceMockImpl" />
 </beans>
