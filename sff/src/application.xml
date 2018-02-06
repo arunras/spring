@@ -3,4 +3,5 @@
 
 <beans>
   <bean id="bookService" class="core.sff.avalon.services.BookServiceMockImpl" />
+
 </beans>
