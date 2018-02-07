@@ -2,5 +2,17 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
-  <bean id="bookService" class="core.sff.avalon.services.BookServiceMockImpl" />
+  <bean id="accountsService"
+        class="core.sff.avalon.services.AccountsServiceMockImpl" />
+  <bean id="bookService" 
+        class="core.sff.avalon.services.BookServiceMockImpl" />
+  <bean id="purchasingService"
+    class="core.sff.avalon.services.PurchasingServiceImpl">
+    <constructor-arg index="1" ref="bookService" />
+    <constructor-arg index="0" ref="accountsService" />
+    <!--
+    <property name="bookService" ref="bookService" />
+    <property name="accountService" ref="accountService" />
+    -->
+  </bean>
 </beans>
