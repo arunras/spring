@@ -19,13 +19,16 @@ public class BookDaoCleanerJdbcImpl implements BookDao {
 
   public BookDaoCleanerJdbcImpl(JdbcTemplate template) {
     this.jdbcTemplate = template;
+  }
 
+  public void createTables() {
     // TODO: impove this try block
     try {
       jdbcTemplate.update(CREATE_TABLE_SQL);
     } catch (Exception e) {
       System.out.println("Assuming that table alread exists");
     }
+
   }
 
   @Override

@@ -2,9 +2,25 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
+  <!--  Datasources  -->
+  <bean id="dataSource"
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+    <property name="url" value="jdbc:hsqldb:file:database.dat;shutdown=true" />
+    <property name="username" value="sa" />
+    <property name="password" value="" />
+  </bean>
+
+  <!-- Templates  -->
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <constructor-arg ref="dataSource" />
+  </bean>
+
   <!--  DAO Beans  -->
   <bean id="bookDao"
-        class="core.sff.avalon.data.BookDaoHorridJdbcImpl" />
+        class="core.sff.avalon.data.BookDaoCleanerJdbcImpl" init-method="createTables">
+    <constructor-arg ref="jdbcTemplate" />
+  </bean>
 
   <!--  Service Beans  -->
   <bean id="accountsService"
