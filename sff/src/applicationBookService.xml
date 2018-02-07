@@ -8,8 +8,8 @@
         class="core.sff.avalon.services.BookServiceMockImpl" />
   <bean id="purchasingService"
     class="core.sff.avalon.services.PurchasingServiceImpl">
-    <constructor-arg index="1" ref="bookService" />
-    <constructor-arg index="0" ref="accountsService" />
+    <constructor-arg ref="bookService" />
+    <constructor-arg ref="accountsService" />
     <!--
     <property name="bookService" ref="bookService" />
     <property name="accountService" ref="accountService" />
