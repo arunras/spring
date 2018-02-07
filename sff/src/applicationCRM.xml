@@ -4,4 +4,8 @@
 <beans>
   <bean id="customerService" class="core.sff.crm.services.customers.CustomerManagementMockImpl" />
   <bean id="diaryService" class="core.sff.crm.services.diary.DiaryManagementServiceMockImpl" />
+  <bean id="callService" class="core.sff.crm.services.calls.CallHandlingServiceImpl">
+    <constructor-arg ref="customerService" />
+    <constructor-arg ref="diaryService" />
+  </bean>
 </beans>
