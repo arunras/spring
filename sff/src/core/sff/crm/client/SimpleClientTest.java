@@ -19,8 +19,19 @@ public class SimpleClientTest {
   public static void main(String[] args) {
     ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("applicationCRM.xml");
 
+    CustomerManagementService customerService = container.getBean(CustomerManagementService.class);
     CallHandlingService callService = container.getBean(CallHandlingService.class);
     DiaryManagementService diaryService = container.getBean(DiaryManagementService.class);
+
+    try {
+      Customer foundCustomer = customerService.findCustomerById("CS03939");
+      foundCustomer.setTelephone("6467537683");
+      foundCustomer.setEmail("run@gmail.com");
+      customerService.updateCustomer(foundCustomer);
+      customerService.deleteCustomer(foundCustomer);
+    } catch (CustomerNotFoundException e) {
+      System.out.println("Sorry, that customer couldn't be found.");
+    }
 
     Call newCall = new Call("Larry Wall called from Acme Corp");
 
