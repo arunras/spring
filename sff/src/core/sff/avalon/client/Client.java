@@ -13,7 +13,7 @@ public class Client {
   public static void main(String[] args) {
     ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("applicationBookService.xml");
 
-    BookService bookService = container.getBean(BookService.class);
+    BookService bookService = container.getBean("bookService", BookService.class);
 
     bookService.registerNewBook(new Book("2384928389223", "War and Peace", "Leo Tolstoy", 10.99));
 

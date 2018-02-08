@@ -1,5 +1,6 @@
 package core.sff.avalon.services;
 
+import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 
 public class PurchasingServiceImpl implements PurchasingService {
@@ -13,9 +14,13 @@ public class PurchasingServiceImpl implements PurchasingService {
 
   public void buyBook(String isbn) {
     // Find the correct book
-    Book requiredBook = books.getBookByIsbn(isbn);
-
-    // Now raise the invoice
-    accounts.raiseInvoice(requiredBook);
+    Book requiredBook;
+		try {
+			requiredBook = books.getBookByIsbn(isbn);
+	    // Now raise the invoice
+	    accounts.raiseInvoice(requiredBook);
+		} catch (BookNotFoundException e) {
+			System.out.println("Book not found");
+		}
   }
 }
