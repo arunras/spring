@@ -32,7 +32,7 @@
 
   <bean id="purchasingService"
     class="core.sff.avalon.services.PurchasingServiceImpl">
-    <constructor-arg ref="bookService" />
+    <constructor-arg ref="bookServiceTarget" />
     <constructor-arg ref="accountsService" />
     <!--
     <property name="bookService" ref="bookService" />
@@ -40,10 +40,25 @@
     -->
   </bean>
 
-  <!-- Timing Bean  -->
+  <!-- Timing Bean
   <bean id="bookService"
         class="core.sff.avalon.services.BookServiceTimingProxy">
     <property name="originalBookService" ref="bookServiceTarget" />
+  </bean>
+  -->
+
+  <!--  advice -->
+  <bean id="loggingAdvice" class="core.sff.avalon.advice.PerformanceTimingAdvice" />
+
+  <!--  Generated Proxies  -->
+  <bean id="bookService" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="proxyInterfaces" value="core.sff.avalon.services.BookService" />
+    <property name="interceptorNames">
+      <list>
+        <value>loggingAdvice</value>
+      </list>
+    </property>
+    <property name="target" ref="bookServiceTarget" />
   </bean>
 </beans>
 

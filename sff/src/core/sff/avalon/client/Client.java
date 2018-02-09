@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 import core.sff.avalon.services.BookService;
 import core.sff.avalon.services.PurchasingService;
@@ -22,7 +23,16 @@ public class Client {
     for (Book next: allBooks) {
       System.out.println(next);
     }
-
+    
+    /*
+    try {
+    		Book foundBook = bookService.getBookByIsbn("sdfasfdsaf");
+    } catch (BookNotFoundException e) {
+    		System.out.println("Sorry, that book doesn't exists");
+    }
+		*/
+    
     container.close();
   }
 }
+ 

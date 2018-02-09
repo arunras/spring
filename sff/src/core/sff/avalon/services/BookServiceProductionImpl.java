@@ -3,6 +3,7 @@ package core.sff.avalon.services;
 import java.util.List;
 
 import core.sff.avalon.data.BookDao;
+import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 
 public class BookServiceProductionImpl implements BookService {
@@ -23,7 +24,7 @@ public class BookServiceProductionImpl implements BookService {
   }
 
   @Override
-  public Book getBookByIsbn(String isbn) {
+  public Book getBookByIsbn(String isbn) throws BookNotFoundException{
     return dao.findBookByIsbn(isbn);
   }
 
