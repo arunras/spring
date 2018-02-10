@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -35,11 +36,19 @@ public class BookDaoCleanerJdbcImpl implements BookDao {
   public List<Book> allBooks() {
     return jdbcTemplate.query(GET_ALL_BOOKS_SQL, new BookMapper());
   }
-
-  @Override
-  public Book findBookByIsbn(String isbn) {
-    return jdbcTemplate.queryForObject("SELECT * FROM Book WHERE isbn=?", new BookMapper(), isbn);
-  }
+  
+	@Override
+	public Book findBookByIsbn(String isbn) throws BookNotFoundException
+	{
+		try
+		{
+			return jdbcTemplate.queryForObject("SELECT * FROM BOOK WHERE ISBN=?", new BookMapper(), isbn);
+		}
+		catch (EmptyResultDataAccessException e)
+		{
+			throw new BookNotFoundException();
+		}
+	}
 
   @Override
   public void create(Book newBook) {

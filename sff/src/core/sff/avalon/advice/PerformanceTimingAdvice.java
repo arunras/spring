@@ -1,13 +1,18 @@
 package core.sff.avalon.advice;
 
-import java.lang.reflect.Method;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
+@Aspect
+public class PerformanceTimingAdvice {
+  @Pointcut("execution (* core.sff.avalon.services.*.*(..))")
+  public void allServiceMethods() {}
 
-public class PerformanceTimingAdvice implements MethodInterceptor {
-  @Override
-  public Object invoke(MethodInvocation method) throws Throwable {
+  @Around("allServiceMethods()")
+  public Object performTimingMeasurement(ProceedingJoinPoint method) throws Throwable {
     // before
     long startTime = System.nanoTime();
 
@@ -20,8 +25,13 @@ public class PerformanceTimingAdvice implements MethodInterceptor {
 	    long endTime = System.nanoTime();
 	    long timeTaken = endTime - startTime;
 	
-	    System.out.println("The method " + method.getMethod().getName() + " took " + timeTaken + " nanosecond");
+	    System.out.println("The method " + method.getSignature().getName() + " took " + timeTaken + " nanosecond");
     }
+  }
+  
+  @Before("allServiceMethods()")
+  public void beforeAdviceTesting() {
+  		System.out.println("Now entering a method...");
   }
 
 }

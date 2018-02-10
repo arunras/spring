@@ -9,5 +9,5 @@ public interface BookDao {
   public void delete(Book redundantBook);
   public List<Book> allBooks();
   public List<Book> findBooksByAuthor(String author);
-  public Book findBookByIsbn(String isbn);
+  public Book findBookByIsbn(String isbn) throws BookNotFoundException;
 }

@@ -12,7 +12,7 @@ import core.sff.avalon.services.PurchasingService;
 
 public class Client {
   public static void main(String[] args) {
-    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("applicationBookService.xml");
+    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("applicationAOPAnnotation.xml");
 
     BookService bookService = container.getBean("bookService", BookService.class);
 
@@ -24,13 +24,13 @@ public class Client {
       System.out.println(next);
     }
     
-    /*
+    
     try {
     		Book foundBook = bookService.getBookByIsbn("sdfasfdsaf");
     } catch (BookNotFoundException e) {
     		System.out.println("Sorry, that book doesn't exists");
     }
-		*/
+		
     
     container.close();
   }
