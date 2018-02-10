@@ -1,5 +1,6 @@
 package core.sff.avalon.advice;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,8 +31,8 @@ public class PerformanceTimingAdvice {
   }
   
   @Before("allServiceMethods()")
-  public void beforeAdviceTesting() {
-  		System.out.println("Now entering a method...");
+  public void beforeAdviceTesting(JoinPoint jp) {
+  		System.out.println("Now entering a method..." + jp.getSignature().getName());
   }
 
 }

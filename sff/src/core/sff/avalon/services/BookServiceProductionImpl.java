@@ -2,10 +2,13 @@ package core.sff.avalon.services;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import core.sff.avalon.data.BookDao;
 import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 
+@Transactional
 public class BookServiceProductionImpl implements BookService {
   private BookDao dao;
 

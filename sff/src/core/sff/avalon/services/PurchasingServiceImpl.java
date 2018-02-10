@@ -1,8 +1,11 @@
 package core.sff.avalon.services;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 
+@Transactional
 public class PurchasingServiceImpl implements PurchasingService {
   private AccountsService accounts;
   private BookService books;

@@ -12,27 +12,29 @@ import core.sff.avalon.services.PurchasingService;
 
 public class Client {
   public static void main(String[] args) {
-    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("applicationAOPAnnotation.xml");
+    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("appTransactionAnnotation.xml");
 
-    BookService bookService = container.getBean("bookService", BookService.class);
-
-    bookService.registerNewBook(new Book("2384928389223", "War and Peace", "Leo Tolstoy", 10.99));
-
-    List<Book> allBooks = bookService.getEntireCatalogue();
-
-    for (Book next: allBooks) {
-      System.out.println(next);
-    }
-    
-    
     try {
-    		Book foundBook = bookService.getBookByIsbn("sdfasfdsaf");
-    } catch (BookNotFoundException e) {
-    		System.out.println("Sorry, that book doesn't exists");
-    }
+	    BookService bookService = container.getBean("bookService", BookService.class);
+	
+	    bookService.registerNewBook(new Book("2384928389223", "War and Peace", "Leo Tolstoy", 10.99));
+	
+	    List<Book> allBooks = bookService.getEntireCatalogue();
+	
+	    for (Book next: allBooks) {
+	      System.out.println(next);
+	    }
+	    
+	    
+	    try {
+	    		Book foundBook = bookService.getBookByIsbn("sdfasfdsaf");
+	    } catch (BookNotFoundException e) {
+	    		System.out.println("Sorry, that book doesn't exists");
+	    }
 		
-    
-    container.close();
+    } finally {
+    		container.close();
+    }
   }
 }
  
