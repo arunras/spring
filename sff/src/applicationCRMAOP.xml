@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+  <!--  Datasources  -->
+  <bean id="dataSource"
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+    <property name="url" value="jdbc:hsqldb:file:crm_db.dat;shutdown=true" />
+    <property name="username" value="sa" />
+    <property name="password" value="" />
+  </bean>
+  
+   <!-- Templates  -->
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+  
+  <!-- DAO Beans -->
+  <bean id="customerDao" class="core.sff.crm.dataaccess.CustomerDaoJdbcTemplateImpl" init-method="createTables">
+  	<constructor-arg ref="jdbcTemplate" />
+  </bean>
+  
+  <bean id="actionDao" class="core.sff.crm.dataaccess.ActionDaoJdbcImpl" init-method="createTables">
+  	<constructor-arg ref="jdbcTemplate" />
+  </bean>
+   
+  <!-- Service Beans -->	
+  <bean id="customerService" class="core.sff.crm.services.customers.CustomerManagementServiceProductionImpl">
+  	<constructor-arg ref="customerDao" />
+  </bean>
+  
+  <bean id="diaryService" class="core.sff.crm.services.diary.DiaryManagementServiceProductionImpl">
+  	<constructor-arg ref="actionDao" />
+  </bean>
+  
+  <bean id="callService" class="core.sff.crm.services.calls.CallHandlingServiceImpl">
+    <constructor-arg ref="customerService" />
+    <constructor-arg ref="diaryService" />
+  </bean>
+
+  <!--  AOP Weaving  -->
+  <bean id="performanceAvice" class="core.sff.crm.advice.PerformanceTimingAdvice" />
+
+  <aop:config>
+    <aop:aspect ref="performanceAvice" >
+      <aop:around method="recordTiming"
+                  pointcut="execution( * core.sff.crm.services..*.* (..) )
+                  		|| execution( * core.sff.crm.dataaccess..*.* (..) )" />
+    </aop:aspect>
+  </aop:config>
+</beans>
+
+
+
+
+
+
+
+
+
