@@ -1,5 +1,6 @@
 package core.sff.avalon.services;
 
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -16,8 +17,8 @@ public class PurchasingServiceImpl implements PurchasingService {
     this.books = bookService;
   }
 
-  @Transactional(rollbackFor= {CustomerCreditExcededException.class, BookNotFoundException.class},
-  								timeout=10 )
+  @Transactional(rollbackFor={CustomerCreditExcededException.class, BookNotFoundException.class},
+  								timeout=10, isolation=Isolation.SERIALIZABLE )
   public void buyBook(String isbn) throws BookNotFoundException, CustomerCreditExcededException {
     // Find the correct book
     Book requiredBook = books.getBookByIsbn(isbn);
