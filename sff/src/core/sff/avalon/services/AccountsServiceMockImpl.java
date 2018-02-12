@@ -8,9 +8,8 @@ import core.sff.avalon.domain.Book;
 @Transactional(propagation = Propagation.SUPPORTS)
 public class AccountsServiceMockImpl implements AccountsService
 {	
-	public void raiseInvoice(Book requiredBook) 
-	{
-		// a very basic implementation for testing
-		System.out.println("Raised the invoice for " + requiredBook);
+	public void raiseInvoice(Book requiredBook) throws CustomerCreditExcededException {
+		System.out.println("Raised an invoice");
+    //throw new CustomerCreditExcededException();
 	}
 }

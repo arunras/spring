@@ -9,6 +9,7 @@ import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 import core.sff.avalon.services.AccountsService;
 import core.sff.avalon.services.BookService;
+import core.sff.avalon.services.CustomerCreditExcededException;
 import core.sff.avalon.services.PurchasingService;
 
 public class Client {
@@ -20,7 +21,7 @@ public class Client {
       BookService bookService = container.getBean(BookService.class);
 
       // begin
-      bookService.registerNewBook(new Book("100039939369", "Test Title", "Author", 10.99));
+      //bookService.registerNewBook(new Book("100039939369", "Test Title", "Author", 10.99));
       // commit
       
       // begin
@@ -28,6 +29,8 @@ public class Client {
         purchasing.buyBook("100039939369");
       } catch (BookNotFoundException e) {
         System.out.println("Sorry, that book doesn't exist");
+      } catch (CustomerCreditExcededException e) {
+      		System.out.println("Sorry, you can't afford it. Go away!");
       }
       // commit
 

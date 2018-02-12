@@ -28,6 +28,7 @@ public class BookServiceProductionImpl implements BookService {
   }
 
   @Override
+  @Transactional(readOnly=true)
   public Book getBookByIsbn(String isbn) throws BookNotFoundException{
     return dao.findBookByIsbn(isbn);
   }

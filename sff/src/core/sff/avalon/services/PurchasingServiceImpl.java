@@ -1,6 +1,7 @@
 package core.sff.avalon.services;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
@@ -15,7 +16,9 @@ public class PurchasingServiceImpl implements PurchasingService {
     this.books = bookService;
   }
 
-  public void buyBook(String isbn) throws BookNotFoundException {
+  @Transactional(rollbackFor= {CustomerCreditExcededException.class, BookNotFoundException.class},
+  								timeout=10 )
+  public void buyBook(String isbn) throws BookNotFoundException, CustomerCreditExcededException {
     // Find the correct book
     Book requiredBook = books.getBookByIsbn(isbn);
 
