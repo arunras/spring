@@ -2,6 +2,8 @@ package core.sff.crm.services.calls;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import core.sff.crm.domain.Action;
@@ -12,10 +14,12 @@ import core.sff.crm.services.customers.CustomerNotFoundException;
 import core.sff.crm.services.diary.DiaryManagementService;
 
 @Transactional
+@Service
 public class CallHandlingServiceImpl implements CallHandlingService {
   private CustomerManagementService customerService;
   private DiaryManagementService diaryService;
 
+  @Autowired
   public CallHandlingServiceImpl
     (CustomerManagementService customerService, DiaryManagementService diaryService) {
     this.customerService = customerService;

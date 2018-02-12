@@ -2,6 +2,8 @@ package core.sff.crm.services.customers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import core.sff.crm.dataaccess.CustomerDao;
@@ -10,9 +12,11 @@ import core.sff.crm.domain.Call;
 import core.sff.crm.domain.Customer;
 
 @Transactional
+@Service
 public class CustomerManagementServiceProductionImpl implements CustomerManagementService {
   private CustomerDao dao;
 
+  @Autowired
   public CustomerManagementServiceProductionImpl(CustomerDao dao) {
     this.dao = dao;
   }

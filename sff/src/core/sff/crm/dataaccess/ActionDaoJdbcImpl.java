@@ -6,11 +6,16 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import core.sff.crm.domain.Action;
 
+@Repository
 public class ActionDaoJdbcImpl implements ActionDao
 {
 	private static final String DELETE_SQL = "DELETE FROM ACTION WHERE ACTION_ID=?";
@@ -20,6 +25,7 @@ public class ActionDaoJdbcImpl implements ActionDao
 	
 	private JdbcTemplate template;
 	
+	@Autowired
 	public ActionDaoJdbcImpl(JdbcTemplate template)
 	{
 		this.template = template;
@@ -30,6 +36,7 @@ public class ActionDaoJdbcImpl implements ActionDao
 		template.update(INSERT_SQL,newAction.getDetails(), newAction.isComplete(),newAction.getOwningUser(),  newAction.getRequiredBy());					
 	}
 
+	@PostConstruct
 	private void createTables()
 	{
 		try
