@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
+import core.sff.avalon.services.AccountsService;
 import core.sff.avalon.services.BookService;
 import core.sff.avalon.services.PurchasingService;
 
@@ -15,23 +16,21 @@ public class Client {
     ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("appTransactionAnnotation.xml");
 
     try {
-	    BookService bookService = container.getBean("bookService", BookService.class);
-	
-	    bookService.registerNewBook(new Book("2384928389223", "War and Peace", "Leo Tolstoy", 10.99));
-	
-	    List<Book> allBooks = bookService.getEntireCatalogue();
-	
-	    for (Book next: allBooks) {
-	      System.out.println(next);
-	    }
-	    
-	    
-	    try {
-	    		Book foundBook = bookService.getBookByIsbn("sdfasfdsaf");
-	    } catch (BookNotFoundException e) {
-	    		System.out.println("Sorry, that book doesn't exists");
-	    }
-		
+      PurchasingService purchasing = container.getBean(PurchasingService.class);	
+      BookService bookService = container.getBean(BookService.class);
+
+      // begin
+      bookService.registerNewBook(new Book("100039939369", "Test Title", "Author", 10.99));
+      // commit
+      
+      // begin
+      try {
+        purchasing.buyBook("100039939369");
+      } catch (BookNotFoundException e) {
+        System.out.println("Sorry, that book doesn't exist");
+      }
+      // commit
+
     } finally {
     		container.close();
     }

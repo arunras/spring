@@ -89,4 +89,10 @@ public class BookServiceTimingProxy implements BookService {
     long timeTaken = timeNow - timeThen;
     System.out.println("registerNewBook took " + timeTaken / nanoSecondsInAMillisecond + " milliseconds");
   }
+
+	@Override
+	public void deleteFromStock(Book oldBook) {
+		// TODO Auto-generated method stub
+		
+	}
 }

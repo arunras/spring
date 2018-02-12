@@ -2,13 +2,14 @@ package core.sff.avalon.services;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import core.sff.avalon.data.BookDao;
 import core.sff.avalon.data.BookNotFoundException;
 import core.sff.avalon.domain.Book;
 
-@Transactional
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class BookServiceProductionImpl implements BookService {
   private BookDao dao;
 
@@ -39,5 +40,10 @@ public class BookServiceProductionImpl implements BookService {
   @Override
   public void registerNewBook(Book newBook) {
     dao.create(newBook);
+  }
+
+  @Override
+  public void deleteFromStock(Book oldBook) {
+    dao.delete(oldBook);
   }
 }

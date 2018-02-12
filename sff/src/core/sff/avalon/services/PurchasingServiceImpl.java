@@ -15,15 +15,14 @@ public class PurchasingServiceImpl implements PurchasingService {
     this.books = bookService;
   }
 
-  public void buyBook(String isbn) {
+  public void buyBook(String isbn) throws BookNotFoundException {
     // Find the correct book
-    Book requiredBook;
-		try {
-			requiredBook = books.getBookByIsbn(isbn);
-	    // Now raise the invoice
-	    accounts.raiseInvoice(requiredBook);
-		} catch (BookNotFoundException e) {
-			System.out.println("Book not found");
-		}
+    Book requiredBook = books.getBookByIsbn(isbn);
+
+    // delete the book from stock
+    books.deleteFromStock(requiredBook);
+
+	  // Now raise the invoice
+	  accounts.raiseInvoice(requiredBook);
   }
 }
