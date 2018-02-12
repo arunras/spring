@@ -2,11 +2,14 @@ package core.sff.crm.services.customers;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import core.sff.crm.dataaccess.CustomerDao;
 import core.sff.crm.dataaccess.RecordNotFoundException;
 import core.sff.crm.domain.Call;
 import core.sff.crm.domain.Customer;
 
+@Transactional
 public class CustomerManagementServiceProductionImpl implements CustomerManagementService {
   private CustomerDao dao;
 

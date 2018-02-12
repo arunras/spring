@@ -18,7 +18,7 @@ public class PurchasingServiceImpl implements PurchasingService {
   }
 
   @Transactional(rollbackFor={CustomerCreditExcededException.class, BookNotFoundException.class},
-  								timeout=10, isolation=Isolation.SERIALIZABLE )
+  								timeout=10, isolation=Isolation.SERIALIZABLE)
   public void buyBook(String isbn) throws BookNotFoundException, CustomerCreditExcededException {
     // Find the correct book
     Book requiredBook = books.getBookByIsbn(isbn);

@@ -2,9 +2,12 @@ package core.sff.crm.services.diary;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import core.sff.crm.dataaccess.ActionDao;
 import core.sff.crm.domain.Action;
 
+@Transactional 
 public class DiaryManagementServiceProductionImpl implements DiaryManagementService {
   private ActionDao dao;
 

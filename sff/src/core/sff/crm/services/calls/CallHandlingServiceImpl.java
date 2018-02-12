@@ -2,6 +2,8 @@ package core.sff.crm.services.calls;
 
 import java.util.Collection;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import core.sff.crm.domain.Action;
 import core.sff.crm.domain.Call;
 
@@ -9,6 +11,7 @@ import core.sff.crm.services.customers.CustomerManagementService;
 import core.sff.crm.services.customers.CustomerNotFoundException;
 import core.sff.crm.services.diary.DiaryManagementService;
 
+@Transactional
 public class CallHandlingServiceImpl implements CallHandlingService {
   private CustomerManagementService customerService;
   private DiaryManagementService diaryService;
