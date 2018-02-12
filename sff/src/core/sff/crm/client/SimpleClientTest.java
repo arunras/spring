@@ -17,7 +17,7 @@ import core.sff.crm.services.diary.DiaryManagementService;
 
 public class SimpleClientTest {
   public static void main(String[] args) {
-    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("applicationCRMAOP.xml");
+    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("appBSAOPAutowire.xml");
 
     CustomerManagementService customerService = container.getBean(CustomerManagementService.class);
     CallHandlingService callService = container.getBean(CallHandlingService.class);

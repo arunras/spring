@@ -31,6 +31,6 @@ public class CallHandlingServiceImpl implements CallHandlingService {
     // TODO:2 call the diary service to record the actions
     for (Action nextAction: actions) {
       diaryService.recordAction(nextAction);
-    }
+    } 
   }
 }

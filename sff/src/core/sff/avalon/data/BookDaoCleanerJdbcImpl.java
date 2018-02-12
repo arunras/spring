@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,6 +22,7 @@ public class BookDaoCleanerJdbcImpl implements BookDao {
 	private static final String CREATE_TABLE_SQL = "create table BOOK(ISBN VARCHAR(20), TITLE VARCHAR(50), AUTHOR VARCHAR(50), PRICE DOUBLE)";
 	private static final String GET_ALL_BOOKS_SQL = "select * from BOOK";
 
+	@Autowired
   public BookDaoCleanerJdbcImpl(JdbcTemplate template) {
     this.jdbcTemplate = template;
   }

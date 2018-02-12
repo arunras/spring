@@ -14,7 +14,7 @@ import core.sff.avalon.services.PurchasingService;
 
 public class Client {
   public static void main(String[] args) {
-    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("appTransactionAnnotation.xml");
+    ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("appBSAOPAutowire.xml");
 
     try {
       PurchasingService purchasing = container.getBean(PurchasingService.class);	
